@@ -22,7 +22,7 @@ async function login(req: IReq<ILoginReq>, res: IRes) {
   const userPayload = {
     id: user.id,
     email: user.email,
-    name: user.firstName + user.lastName,
+    name: user.firstName + " "+ user.lastName,
   };
   // Setup Admin Cookie
   await SessionUtil.addSessionData(res, userPayload);
