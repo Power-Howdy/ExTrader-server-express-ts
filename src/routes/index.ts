@@ -64,7 +64,8 @@ userRouter.delete(
 );
 
 // Add UserRouter
-apiRouter.use(Paths.Users.Base, adminMw, userRouter);
+apiRouter.use(Paths.Users.Base, userRouter);
+// apiRouter.use(Paths.Users.Base, adminMw, userRouter);
 
 
 // **** Export default **** //

@@ -28,7 +28,7 @@ async function add(user: UserDTO): Promise<void> {
   if(exists) {
     throw new Error(EMAIL_ALREADY_TAKEN);
   }
-  userRepo.create(user);
+  await userRepo.insert(user);
   return;
 }
 

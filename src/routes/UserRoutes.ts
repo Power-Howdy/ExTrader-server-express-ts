@@ -19,19 +19,25 @@ async function getAll(_: IReq, res: IRes) {
 /**
  * Add one user.
  */
-async function add(req: IReq<{user: UserDTO}>, res: IRes) {
-  const { user } = req.body;
-  
+async function add(req: IReq<UserDTO>, res: IRes) {
+  const user = req.body;
   if(user.password) {
     const pwdHash = await PwdUtil.getHash(user.password);
-    await UserService.addOne({
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      pwdHash: pwdHash,
-      
-    });
-    return res.status(HttpStatusCodes.CREATED).end();
+    try {
+      await UserService.addOne({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        pwdHash: pwdHash,      
+      });
+      return res.status(HttpStatusCodes.CREATED).end();
+    } catch (error) {
+      console.log("User creation error: ", error);
+      return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({
+        error: error.message
+      })
+    }
+    
   }
   
 }
