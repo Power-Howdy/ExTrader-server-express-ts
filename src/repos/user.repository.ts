@@ -1,7 +1,7 @@
-import PwdUtil from '@src/util/PwdUtil';
 import { User } from '@src/entity/user.entity';
 import { AppDataSource } from '@src/data-source';
 import UserDTO from '@src/dto/user.dto';
+import { EMAIL_ALREADY_TAKEN } from '@src/common/ErrorMsgs';
 
 // **** Functions **** //
 const userRepo = AppDataSource.getRepository(User);
@@ -23,7 +23,11 @@ async function getAll(): Promise<User[]> {
 /**
  * Add one user.
  */
-async function add(user: UserDTO): Promise<void> {  
+async function add(user: UserDTO): Promise<void> {
+  const exists = await getOne(user.email);
+  if(exists) {
+    throw new Error(EMAIL_ALREADY_TAKEN);
+  }
   userRepo.create(user);
   return;
 }

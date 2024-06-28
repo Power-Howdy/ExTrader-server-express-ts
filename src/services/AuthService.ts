@@ -7,15 +7,16 @@ import HttpStatusCodes from '@src/common/HttpStatusCodes';
 import RouteError from '@src/common/RouteError';
 
 import { User } from '@src/entity/user.entity';
+import { EMAIL_NOT_FOUND, UNAUTHORIZED } from '@src/common/ErrorMsgs';
 
 
 // **** Variables **** //
 
 // Errors
 export const Errors = {
-  Unauth: 'Unauthorized',
+  Unauth: UNAUTHORIZED,
   EmailNotFound(email: string) {
-    return `User with email "${email}" not found`;
+    return EMAIL_NOT_FOUND + email;
   },
 } as const;
 

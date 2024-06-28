@@ -8,10 +8,8 @@ import UserDTO from '@src/dto/user.dto';
 
 // **** Variables **** //
 
-export const USER_NOT_FOUND_ERR = 'User not found';
 
 
-// **** Functions **** //
 
 /**
  * Get all users.
@@ -31,14 +29,14 @@ function addOne(user: UserDTO): Promise<void> {
  * Update one user.
  */
 async function updateOne(user: UserDTO): Promise<void> {
-
+  //TODO:: 
 }
 
 /**
  * Delete a user by their id.
  */
 async function _delete(id: number): Promise<void> {
-
+  // TODO:: 
 }
 
 

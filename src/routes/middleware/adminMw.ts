@@ -1,28 +1,19 @@
 /**
  * Middleware to verify user logged in and is an an admin.
  */
-
 import { Request, Response, NextFunction } from 'express';
 import { JwtPayload } from 'jsonwebtoken';
 
 import HttpStatusCodes from '@src/common/HttpStatusCodes';
 
 import SessionUtil from '@src/util/SessionUtil';
-// import { ISessionUser, UserRoles } from '@src/models/User';
-
-
-// **** Variables **** //
-
-const USER_UNAUTHORIZED_ERR = 'User not authorized to perform this action';
+import { USER_UNAUTHORIZED_ERR } from '@src/common/ErrorMsgs';
 
 
 // **** Types **** //
-
 type TSessionData = JwtPayload;
 
-
 // **** Functions **** //
-
 /**
  * See note at beginning of file.
  */
@@ -49,7 +40,5 @@ async function adminMw(
   }
 }
 
-
 // **** Export Default **** //
-
 export default adminMw;

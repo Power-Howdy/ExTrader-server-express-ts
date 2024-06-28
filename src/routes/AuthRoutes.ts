@@ -4,9 +4,7 @@ import AuthService from '@src/services/AuthService';
 
 import { IReq, IRes } from './types/express/misc';
 
-
 // **** Types **** //
-
 interface ILoginReq {
   email: string;
   password: string;
@@ -14,7 +12,6 @@ interface ILoginReq {
 
 
 // **** Functions **** //
-
 /**
  * Login a user.
  */
@@ -22,14 +19,15 @@ async function login(req: IReq<ILoginReq>, res: IRes) {
   const { email, password } = req.body;
   // Login
   const user = await AuthService.login(email, password);
-  // Setup Admin Cookie
-  await SessionUtil.addSessionData(res, {
+  const userPayload = {
     id: user.id,
     email: user.email,
     name: user.firstName + user.lastName,
-  });
+  };
+  // Setup Admin Cookie
+  await SessionUtil.addSessionData(res, userPayload);
   // Return
-  return res.status(HttpStatusCodes.OK).end();
+  return res.status(HttpStatusCodes.OK).json(userPayload);
 }
 
 /**
@@ -42,7 +40,6 @@ function logout(_: IReq, res: IRes) {
 
 
 // **** Export default **** //
-
 export default {
   login,
   logout,
