@@ -64,6 +64,11 @@ app.use((
   }
   return res.status(status).json({ error: err.message });
 });
+app.use("*", (req, res) => {
+  res.status(404).json({
+    error: "No such api found on server."
+  })
+})
 
 
 // ** Front-End Content ** //
