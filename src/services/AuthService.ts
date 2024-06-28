@@ -1,4 +1,4 @@
-import UserRepo from '@src/repos/UserRepo';
+import UserRepo from '@src/repos/user.repository';
 
 import PwdUtil from '@src/util/PwdUtil';
 import { tick } from '@src/util/misc';
@@ -6,7 +6,7 @@ import { tick } from '@src/util/misc';
 import HttpStatusCodes from '@src/common/HttpStatusCodes';
 import RouteError from '@src/common/RouteError';
 
-import { IUser } from '@src/models/User';
+import { User } from '@src/entity/user.entity';
 
 
 // **** Variables **** //
@@ -25,7 +25,7 @@ export const Errors = {
 /**
  * Login a user.
  */
-async function login(email: string, password: string): Promise<IUser> {
+async function login(email: string, password: string): Promise<User> {
   // Fetch user
   const user = await UserRepo.getOne(email);
   if (!user) {

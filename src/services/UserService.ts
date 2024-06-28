@@ -1,8 +1,9 @@
 import RouteError from '@src/common/RouteError';
 import HttpStatusCodes from '@src/common/HttpStatusCodes';
 
-import UserRepo from '@src/repos/UserRepo';
-import { IUser } from '@src/models/User';
+import UserRepo from '@src/repos/user.repository';
+import { User } from '@src/entity/user.entity';
+import UserDTO from '@src/dto/user.dto';
 
 
 // **** Variables **** //
@@ -15,37 +16,29 @@ export const USER_NOT_FOUND_ERR = 'User not found';
 /**
  * Get all users.
  */
-function getAll(): Promise<IUser[]> {
+function getAll(): Promise<User[]> {
   return UserRepo.getAll();
 }
 
 /**
  * Add one user.
  */
-function addOne(user: IUser): Promise<void> {
+function addOne(user: UserDTO): Promise<void> {  
   return UserRepo.add(user);
 }
 
 /**
  * Update one user.
  */
-async function updateOne(user: IUser): Promise<void> {
-  const persists = await UserRepo.persists(user.id);
-  if (!persists) {
-    throw new RouteError(HttpStatusCodes.NOT_FOUND, USER_NOT_FOUND_ERR);
-  }
-  return UserRepo.update(user);
+async function updateOne(user: UserDTO): Promise<void> {
+
 }
 
 /**
  * Delete a user by their id.
  */
 async function _delete(id: number): Promise<void> {
-  const persists = await UserRepo.persists(id);
-  if (!persists) {
-    throw new RouteError(HttpStatusCodes.NOT_FOUND, USER_NOT_FOUND_ERR);
-  }
-  return UserRepo.delete(id);
+
 }
 
 

@@ -2,8 +2,6 @@ import { Router } from 'express';
 import jetValidator from 'jet-validator';
 
 import Paths from '@src/common/Paths';
-import User from '@src/models/User';
-
 import adminMw from './middleware/adminMw';
 import AuthRoutes from './AuthRoutes';
 import UserRoutes from './UserRoutes';
@@ -49,14 +47,12 @@ userRouter.get(
 // Add one user
 userRouter.post(
   Paths.Users.Add,
-  validate(['user', User.isUser]),
   UserRoutes.add,
 );
 
 // Update one user
 userRouter.put(
   Paths.Users.Update,
-  validate(['user', User.isUser]),
   UserRoutes.update,
 );
 

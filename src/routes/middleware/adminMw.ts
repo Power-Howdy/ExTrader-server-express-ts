@@ -8,7 +8,7 @@ import { JwtPayload } from 'jsonwebtoken';
 import HttpStatusCodes from '@src/common/HttpStatusCodes';
 
 import SessionUtil from '@src/util/SessionUtil';
-import { ISessionUser, UserRoles } from '@src/models/User';
+// import { ISessionUser, UserRoles } from '@src/models/User';
 
 
 // **** Variables **** //
@@ -18,7 +18,7 @@ const USER_UNAUTHORIZED_ERR = 'User not authorized to perform this action';
 
 // **** Types **** //
 
-type TSessionData = ISessionUser & JwtPayload;
+type TSessionData = JwtPayload;
 
 
 // **** Functions **** //
@@ -35,8 +35,9 @@ async function adminMw(
   const sessionData = await SessionUtil.getSessionData<TSessionData>(req);
   // Set session data to locals
   if (
-    typeof sessionData === 'object' &&
-    sessionData?.role === UserRoles.Admin
+    typeof sessionData === 'object' 
+    // &&
+    // sessionData?.role === UserRoles.Admin
   ) {
     res.locals.sessionUser = sessionData;
     return next();

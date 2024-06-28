@@ -2,6 +2,7 @@
  * Setup express server.
  */
 
+
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import path from 'path';
@@ -72,23 +73,23 @@ const viewsDir = path.join(__dirname, 'views');
 app.set('views', viewsDir);
 
 // Set static directory (js and css).
-const staticDir = path.join(__dirname, 'public');
-app.use(express.static(staticDir));
+// const staticDir = path.join(__dirname, 'public');
+// app.use(express.static(staticDir));
 
 // Nav to login pg by default
-app.get('/', (_: Request, res: Response) => {
-  res.sendFile('login.html', { root: viewsDir });
-});
+// app.get('/', (_: Request, res: Response) => {
+//   res.sendFile('login.html', { root: viewsDir });
+// });
 
-// Redirect to login if not logged in.
-app.get('/users', (req: Request, res: Response) => {
-  const jwt = req.signedCookies[EnvVars.CookieProps.Key];
-  if (!jwt) {
-    res.redirect('/');
-  } else {
-    res.sendFile('users.html', {root: viewsDir});
-  }
-});
+// // Redirect to login if not logged in.
+// app.get('/users', (req: Request, res: Response) => {
+//   const jwt = req.signedCookies[EnvVars.CookieProps.Key];
+//   if (!jwt) {
+//     res.redirect('/');
+//   } else {
+//     res.sendFile('users.html', {root: viewsDir});
+//   }
+// });
 
 
 // **** Export default **** //
